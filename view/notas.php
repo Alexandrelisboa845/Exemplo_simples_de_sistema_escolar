@@ -119,17 +119,11 @@ $count = 0;
 <body>
 
 
-    <div class="navbar">
-        <a class="" href="home.php">Pagina inicial</a>
-        <a class=" " href="estudante.php">Estudantes</a>
-        <a class=" " href="disciplinas.php">Disciplinas</a>
-        <a class=" " href="Matriculas.php">Matriculas</a>
-        <a class=" active" href="Notas.php">Notas</a>
-        <a class=" " href="Professores.php">Professores</a>
-        <a class=" " href="Turma.php">Turma</a>
-        <a href="../controller/logout.php">Sair</a>
-    </div>
-    <center>
+<?php
+       $index =5; 
+       include_once("navbarApp.php"); ?>
+   
+   <center>
         <div class="login-container">
 
             <table>
@@ -169,6 +163,8 @@ $count = 0;
             </div>
         </div>
     </center>
+
+
 </body>
 
 </html>

@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $genero = $_POST['genero'];
         $endereco = $_POST['endereco'];
         $email = $_POST['email'];
-        $telefone = $_POST['telefone'];
+        $telefone = $_POST['telefone']; 
  
 
         $alunoDAO = new AlunoDAO();

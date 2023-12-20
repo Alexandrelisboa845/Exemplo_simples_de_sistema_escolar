@@ -114,16 +114,10 @@ $count = 0;
 <body>
 
 
-    <div class="navbar">
-        <a class="" href="home.php">Pagina inicial</a>
-        <a class="active " href="estudante.php">Estudantes</a>
-        <a class=" " href="disciplinas.php">Disciplinas</a>
-        <a class=" " href="Matriculas.php">Matriculas</a>
-        <a class=" " href="Notas.php">Notas</a>
-        <a class=" " href="Professores.php">Professores</a>
-        <a class=" " href="Turma.php">Turma</a>
-        <a href="../controller/logout.php">Sair</a>
-    </div>
+    <?php
+       $index = 2; 
+       include_once("navbarApp.php"); ?>
+   
     <center>
         <div class="login-container">
 
