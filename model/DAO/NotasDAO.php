@@ -18,7 +18,7 @@ class NotasDAO
             $Sql_procedure->bindValue(":idDisciplina", $Prof->getIdDisciplina());
             ///Actualizar o campo idade na base de dados
             $Sql_procedure->bindValue(":notaObtida", $Prof->getNotaObtida());
-            ///Actualizar o campo contacto na base de dados
+             
             $Sql_procedure->bindValue(":dataAvaliacao", $Prof->getDataAvaliacao()); 
             //essa linha permite efectivar a instrução sql e depois o resultado é devolvido através do comando return
             return $Sql_procedure->execute();
@@ -44,7 +44,7 @@ class NotasDAO
             $Sql_procedure->bindValue(":idDisciplina", $Prof->getIdDisciplina());
             ///Actualizar o campo idade na base de dados
             $Sql_procedure->bindValue(":notaObtida", $Prof->getNotaObtida());
-            ///Actualizar o campo contacto na base de dados
+             
             $Sql_procedure->bindValue(":dataAvaliacao", $Prof->getDataAvaliacao()); 
 
             //essa linha permite efectivar a instrução sql e depois o resultado é devolvido através do comando return
@@ -99,14 +99,10 @@ class NotasDAO
     private function Listar($linha)
     {
         //Instanciar o objecto Prof
-        $Prof = new NotaDTO();
-        //o objecto Prof a função setId para apanhar os dados que veem  da base de dados
-        $Prof->setId($linha['id']);
-        //o objecto Prof a função setidAluno para apanhar os dados que veem  da base de dados
-        $Prof->setidAluno($linha['idAluno']);
-        //o objecto Prof a função setIdade para apanhar os dados que veem  da base de dados
-        $Prof->setidDisciplina($linha['idDisciplina']);
-        //o objecto Prof a função setContacto para apanhar os dados que veem  da base de dados
+        $Prof = new NotaDTO(); 
+        $Prof->setId($linha['id']); 
+        $Prof->setidAluno($linha['idAluno']); 
+        $Prof->setidDisciplina($linha['idDisciplina']); 
         $Prof->setnotaObtida($linha['notaObtida']);
         $Prof->setDataAvaliacao($linha['dataAvaliacao']); 
         // Depois do objecto estar preenchido , devolve os dados a função listar

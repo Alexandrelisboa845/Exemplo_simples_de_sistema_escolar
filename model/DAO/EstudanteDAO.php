@@ -16,10 +16,8 @@ class EstudanteDAO
             /// Instrução sql, faz referência ao procedimento consultar dados, na base de dados 
             $Sql = "SELECT *  FROM estudante";
             //Fazer a conexão com a base de dados
-            $Sql_procedure = DBConnection::getConnection()->query($Sql);
-            // Permite consultar toda informação na base de dados  
-            $lista = $Sql_procedure->fetchAll(PDO::FETCH_ASSOC);
-            //Criamos um array para receber toda informação vinda da base de dados
+            $Sql_procedure = DBConnection::getConnection()->query($Sql); 
+            $lista = $Sql_procedure->fetchAll(PDO::FETCH_ASSOC); 
             $lista_array = array();
             // Criamos a estrutura de repetição para permitir a leitura de todos os registos na base de dados
             //A variavel $lista passa todos os dados para a variavel $row 

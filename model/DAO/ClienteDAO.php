@@ -48,7 +48,7 @@ class ClienteDAO
             $Sql_procedure->bindValue(":nome",$cliente->getNome());
              ///Actualizar o campo idade na base de dados
             $Sql_procedure->bindValue(":idade",$cliente->getIdade());
-             ///Actualizar o campo contacto na base de dados
+              
             $Sql_procedure->bindValue(":contacto",$cliente->getContacto());
              ///Actualizar o campo endereço na base de dados
             $Sql_procedure->bindValue(":endereco",$cliente->getEndereco());

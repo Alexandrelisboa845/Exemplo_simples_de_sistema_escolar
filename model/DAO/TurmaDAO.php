@@ -115,14 +115,10 @@ class TurmaDAO
     private function ListarM($linha)
     {
         //Instanciar o objecto Aluno
-        $Aluno = new TurmaDTO();
-        //o objecto Aluno a função setId para apanhar os dados que veem  da base de dados
-        $Aluno->setId($linha['id']);
-        //o objecto Aluno a função setnome_disciplina para apanhar os dados que veem  da base de dados
-        $Aluno->setNivelAnoEscolar($linha['nivel_ano_escolar']);
-        //o objecto Aluno a função setIdade para apanhar os dados que veem  da base de dados
-        $Aluno->setCodigoTurma($linha['codigo_turma']);
-        //o objecto Aluno a função setContacto para apanhar os dados que veem  da base de dados
+        $Aluno = new TurmaDTO(); 
+        $Aluno->setId($linha['id']); 
+        $Aluno->setNivelAnoEscolar($linha['nivel_ano_escolar']); 
+        $Aluno->setCodigoTurma($linha['codigo_turma']); 
         $Aluno->setProfessorResponsavel($linha['professor_responsavel']);
         $Aluno->setAnoSemestre($linha['ano_semestre']);
         // Depois do objecto estar preenchido , devolve os dados a função listar
@@ -131,17 +127,12 @@ class TurmaDAO
     private function Listar($linha)
     {
         //Instanciar o objecto Aluno
-        $Aluno = new TurmaDTO();
-        //o objecto Aluno a função setId para apanhar os dados que veem  da base de dados
-        $Aluno->setId($linha['id']);
-        //o objecto Aluno a função setnome_disciplina para apanhar os dados que veem  da base de dados
-        $Aluno->setNivelAnoEscolar($linha['nivel_ano_escolar']);
-        //o objecto Aluno a função setIdade para apanhar os dados que veem  da base de dados
-        $Aluno->setCodigoTurma($linha['codigo_turma']);
-        //o objecto Aluno a função setContacto para apanhar os dados que veem  da base de dados
+        $Aluno = new TurmaDTO(); 
+        $Aluno->setId($linha['id']); 
+        $Aluno->setNivelAnoEscolar($linha['nivel_ano_escolar']); 
+        $Aluno->setCodigoTurma($linha['codigo_turma']); 
         $Aluno->setProfessorResponsavel($linha['nome']);
-        $Aluno->setAnoSemestre($linha['ano_semestre']);
-        // Depois do objecto estar preenchido , devolve os dados a função listar
+        $Aluno->setAnoSemestre($linha['ano_semestre']); 
         return $Aluno;
     }
 }

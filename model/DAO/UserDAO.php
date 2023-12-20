@@ -54,9 +54,9 @@ class UserDAO
                 $Sql = "INSERT INTO users (username,password)values(:username,:password)";
                 //Fazer a conexão com a base de dados
                 $Sql_procedure = DBConnection::getConnection()->prepare($Sql);
-                ///Preencher o campo nome na base de dados
+                ///Preencher o campo username na base de dados
                 $Sql_procedure->bindValue(":username", $username);
-                ///Preencher o campo idade na base de dados
+                ///Preencher o campo password na base de dados
                 $Sql_procedure->bindValue(":password", $password);
                 //essa linha permite efectivar a instrução sql e depois o resultado é devolvido através do comando return
                 return $Sql_procedure->execute();

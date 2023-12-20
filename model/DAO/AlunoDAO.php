@@ -16,7 +16,7 @@ class AlunoDAO
             $Sql_procedure->bindValue(":nome", $Aluno->getNome());
             ///Actualizar o campo idade na base de dados
             $Sql_procedure->bindValue(":data_nascimento", $Aluno->getdatanascimento());
-            ///Actualizar o campo contacto na base de dados
+             
             $Sql_procedure->bindValue(":email", $Aluno->getEmail());
             $Sql_procedure->bindValue(":telefone", $Aluno->getTelefone());
             $Sql_procedure->bindValue(":genero", $Aluno->getGenero());
@@ -45,7 +45,7 @@ class AlunoDAO
             $Sql_procedure->bindValue(":nome", $Aluno->getNome());
             ///Actualizar o campo idade na base de dados
             $Sql_procedure->bindValue(":data_nascimento", $Aluno->getdatanascimento());
-            ///Actualizar o campo contacto na base de dados
+             
             $Sql_procedure->bindValue(":email", $Aluno->getEmail());
             $Sql_procedure->bindValue(":telefone", $Aluno->getTelefone());
             $Sql_procedure->bindValue(":genero", $Aluno->getGenero());

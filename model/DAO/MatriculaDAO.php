@@ -42,12 +42,9 @@ class MatriculaDAO
             /// Instrução sql, faz referência ao procedimento consultar dados, na base de dados 
             $Sql = "SELECT * FROM `matriculas` INNER JOIN alunos ON matriculas.id_aluno=alunos.id INNER JOIN turmas ON matriculas.id_turma=turmas.id";
             //Fazer a conexão com a base de dados
-            $Sql_procedure = DBConnection::getConnection()->query($Sql);
-            // Permite consultar toda informação na base de dados  
-            $lista = $Sql_procedure->fetchAll(PDO::FETCH_ASSOC);
-            //Criamos um array para receber toda informação vinda da base de dados
-            $lista_array = array();
-            // Criamos a estrutura de repetição para permitir a leitura de todos os registos na base de dados
+            $Sql_procedure = DBConnection::getConnection()->query($Sql); 
+            $lista = $Sql_procedure->fetchAll(PDO::FETCH_ASSOC); 
+            $lista_array = array(); 
             //A variavel $lista passa todos os dados para a variavel $row 
             foreach ($lista as $row) {
                 //A variavel $row preenche a função listar 

@@ -10,13 +10,9 @@ class DisciplinaDAO
             /// Instrução sql, faz referência ao procedimento inserir dados, na base de dados 
             $Sql = "INSERT INTO disciplinas (nome_disciplina,carga_horaria,descricao)values(:nome_disciplina,:carga_horaria,:descricao)";
             //Fazer a conexão com a base de dados
-            $Sql_procedure = DBConnection::getConnection()->prepare($Sql);
-            ///Preencher o campo nome_disciplina na base de dados
-            ///Actualizar o campo nome_disciplina na base de dados
-            $Sql_procedure->bindValue(":nome_disciplina", $Aluno->getNomeDisciplina());
-            ///Actualizar o campo idade na base de dados
-            $Sql_procedure->bindValue(":carga_horaria", $Aluno->getCargaHoraria());
-            ///Actualizar o campo contacto na base de dados
+            $Sql_procedure = DBConnection::getConnection()->prepare($Sql); 
+            $Sql_procedure->bindValue(":nome_disciplina", $Aluno->getNomeDisciplina()); 
+            $Sql_procedure->bindValue(":carga_horaria", $Aluno->getCargaHoraria()); 
             $Sql_procedure->bindValue(":descricao", $Aluno->getDescricao());
             //essa linha permite efectivar a instrução sql e depois o resultado é devolvido através do comando return
             return $Sql_procedure->execute();
@@ -34,14 +30,10 @@ class DisciplinaDAO
             $Sql = "UPDATE disciplinas SET nome_disciplina=:nome_disciplina, carga_horaria=:carga_horaria,descricao=:descricao,
             where id=:id";
             //Fazer a conexão com a base de dados
-            $Sql_procedure = DBConnection::getConnection()->prepare($Sql);
-            ///Apanhar o campo id na base de dados para permitir actualizar as restantes colunas na base de dados
-            $Sql_procedure->bindValue(":id", $Aluno->getId());
-            ///Actualizar o campo nome_disciplina na base de dados
-            $Sql_procedure->bindValue(":nome_disciplina", $Aluno->getNomeDisciplina());
-            ///Actualizar o campo idade na base de dados
-            $Sql_procedure->bindValue(":carga_horaria", $Aluno->getCargaHoraria());
-            ///Actualizar o campo contacto na base de dados
+            $Sql_procedure = DBConnection::getConnection()->prepare($Sql); 
+            $Sql_procedure->bindValue(":id", $Aluno->getId()); 
+            $Sql_procedure->bindValue(":nome_disciplina", $Aluno->getNomeDisciplina()); 
+            $Sql_procedure->bindValue(":carga_horaria", $Aluno->getCargaHoraria()); 
             $Sql_procedure->bindValue(":descricao", $Aluno->getdescricao()); 
 
             //essa linha permite efectivar a instrução sql e depois o resultado é devolvido através do comando return
@@ -56,8 +48,7 @@ class DisciplinaDAO
         try {
 
             /// Instrução sql, faz referência ao procedimento eliminar dados, na base de dados 
-            $Sql = "DELETE FROM disciplinas WHERE id=:id";
-            //Fazer a conexão com a base de dados
+            $Sql = "DELETE FROM disciplinas WHERE id=:id"; 
             $Sql_procedure = DBConnection::getConnection()->prepare($Sql);
             // permite verificar se o id que vem do formulário é igual ao que está na BD, se for o dado é eliminado
             $Sql_procedure->bindValue(":id", $Aluno->getId());
@@ -72,8 +63,7 @@ class DisciplinaDAO
     {
         try {
             /// Instrução sql, faz referência ao procedimento consultar dados, na base de dados 
-            $Sql = "SELECT * FROM disciplinas";
-            //Fazer a conexão com a base de dados
+            $Sql = "SELECT * FROM disciplinas"; 
             $Sql_procedure = DBConnection::getConnection()->query($Sql);
             // Permite consultar toda informação na base de dados  
             $lista = $Sql_procedure->fetchAll(PDO::FETCH_ASSOC);
@@ -96,16 +86,11 @@ class DisciplinaDAO
     private function Listar($linha)
     {
         //Instanciar o objecto Aluno
-        $Aluno = new DisciplinaDTO();
-        //o objecto Aluno a função setId para apanhar os dados que veem  da base de dados
-        $Aluno->setId($linha['id']);
-        //o objecto Aluno a função setnome_disciplina para apanhar os dados que veem  da base de dados
-        $Aluno->setNomeDisciplina($linha['nome_disciplina']);
-        //o objecto Aluno a função setIdade para apanhar os dados que veem  da base de dados
-        $Aluno->setCargaHoraria($linha['carga_horaria']);
-        //o objecto Aluno a função setContacto para apanhar os dados que veem  da base de dados
-        $Aluno->setDescricao($linha['descricao']); 
-        // Depois do objecto estar preenchido , devolve os dados a função listar
+        $Aluno = new DisciplinaDTO(); 
+        $Aluno->setId($linha['id']); 
+        $Aluno->setNomeDisciplina($linha['nome_disciplina']); 
+        $Aluno->setCargaHoraria($linha['carga_horaria']); 
+        $Aluno->setDescricao($linha['descricao']);  
         return $Aluno;
     }
 }
