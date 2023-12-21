@@ -32,7 +32,7 @@
             </li>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">UI COMPONENTS</span>
+              <span class="hide-menu">Opções</span>
             </li>
             <li class="sidebar-item   <?php echo($index ==1?"selected":"") ?>">
               <a class="sidebar-link" <?php echo($index ==1?"active":"")   ?>  href="Professores.php" aria-expanded="false">
