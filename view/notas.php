@@ -1,23 +1,25 @@
 <?php
 include_once("../model/DAO/DBConnection.php");
-include_once("../model/DAO/AlunoDAO.php");
-include_once("../model/DTO/MatriculaDTO.php");
-include_once("../model/DAO/MatriculaDAO.php");
-include_once("../model/DTO/TurmasDTO.php");
-$aluno = new AlunoDTO();
-$turmasDTODAO = new AlunoDAO(); 
-$matriculaDTO = new MatriculaDTO();
-$turmasDTO = new TurmaDTO();
-$matriculaDAO = new MatriculaDAO();
+include_once("../model/DTO/NotasDTO.php");
+include_once("../model/DAO/NotasDAO.php");
+include_once("../model/DTO/NotasDTO.php");
+include_once("../model/DAO/DisciplinaDAO.php");
+include_once("../model/DTO/DisciplinasDTO.php");
+$disciplinaDTO = new DisciplinaDTO();
+$notaDAO = new NotasDAO();
+$notaDTO = new NotaDTO();
+
 
 
 // Iniciar a sessão
 
-if (session_unset()) {
-    $username = $_SESSION['username'];
-    header("Location: login-form.php"); // Redirecionar de volta para a página de login se a sessão não estiver definida
-    exit();
+session_start();
+if (isset($_SESSION['name'])) {
+    // Usuário está logado
+    //  echo 'Usuário logado: ' . $_SESSION['name'];
 } else {
+    // Usuário não está logado
+    header("Location: login-form.php");
 }
 $count = 0;
 ?>
@@ -27,143 +29,61 @@ $count = 0;
 
 <head>
     <title>Lista de Matriculas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-        }
 
-        .navbar {
-            overflow: hidden;
-            background-color: #333;
-        }
-
-        .navbar a {
-            float: left;
-            display: block;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-        }
-
-        .navbar a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-
-        .navbar a.active {
-            background-color: #4c79af;
-            color: white;
-        }
-
-        .content {
-            padding: 16px;
-        }
-
-        table {
-            font-family: Arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        td,
-        th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 10px;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .options {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            margin-top: 20px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #4c79af;
-            color: white;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .login-container,
-        .register-container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 20px;
-            max-width: 800px;
-            width: 100%;
-        }
-    </style>
 </head>
 
 <body>
 
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
 
-<?php
-       $index =5; 
-       include_once("navbarApp.php"); ?>
-   
-   <center>
-        <div class="login-container">
+        <?php
+        $index = 5;
+        include_once("navbarApp.php"); ?>
 
-            <table>
-                <tr>
-                    <th>Nº</th>
-                    <th>Nome do estudante</th>
-                    <th>Turma</th>
-                    <th>Nivel ano escolar</th>
-                    <th>Ano Semestre</th>  
-                    <th>Opções</th> 
-                </tr>
-                <?php
-                $count=0;
-                foreach ($matriculaDAO->Readfiltro() as $turmasDTO) :
-                    $count++;
-                ?>
-                    <tr class="trow">
-                        <td><?php echo $count ?></td>
-                        <td><?php echo $turmasDTO->getNome() ?></td>
-                        <td><?php echo $turmasDTO->getCodigoTurma(); ?></td>
-                        <td><?php echo $turmasDTO->getNivelAnoEscolar(); ?></td>
-                        <td><?php echo $turmasDTO->getAnoSemestre(); ?></td> 
-                        <td><a href​="controller\estudante\EstudanteDelete.php?id=<?php echo $Id; ?>" class="btn btn-danger">Ver</a></td>
-                    </tr> 
-                <?php
-                endforeach
-                ?>
-                <!-- Adicione mais linhas conforme necessário -->
-            </table>
-            <div class="options">
-                <label for="">Total Matriculas :<?php echo $count; ?> </label>
-
-            </div>
-            <div class="options">
-                <button onclick="location.href='register_matricula.php'">Matricular estudante</button>
-
-            </div>
-        </div>
-    </center>
-
+        <center>
+            <div class="body-wrapper"> <?php
+                                        include_once("headerApp.php"); ?>
+                <div class="container-fluid">
+                    <div class=" table-responsive card">
+                        <table class="table text-nowrap mb-0 align-middle">
+                            <tr>
+                                <th>Nº</th>
+                                <th>Nome do estudante</th>
+                                <th>Disciplina</th>
+                                <th>Nota de Avaliação</th>
+                                <th>Data de Avaliação</th>
+                                <th>Opções</th>
+                            </tr>
+                            <?php
+                            $count = 0;
+                            foreach ($notaDAO->Read() as $notaDTO) :
+                                $count++;
+                            ?>
+                                <tr class="trow">
+                                    <td><?php echo $count ?></td>
+                                    <td><?php echo $notaDTO->getNome(); ?></td>
+                                    <td><?php echo $notaDTO->getNomeDisciplina(); ?></td>
+                                    <td><?php echo $notaDTO->getDataAvaliacao(); ?></td>
+                                    <td><?php echo $notaDTO->getNotaObtida(); ?></td>
+                                    <td><a href​="controller\estudante\EstudanteDelete.php?id=<?php echo $Id; ?>" class="btn btn-danger">Ver</a></td>
+                                </tr>
+                            <?php
+                            endforeach
+                            ?>
+                            <!-- Adicione mais linhas conforme necessário -->
+                        </table>
+                        <div class="options">
+                            <p></p>
+                            <p></p>
+                        </div>
+                        <div class="options">
+                            <button onclick="location.href='register_nota.php' " class="btn btn-primary m-1">Adicionar notas ao estudante</button>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+        </center>
+    </div>
 
 </body>
 

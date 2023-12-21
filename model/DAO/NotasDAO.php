@@ -8,18 +8,17 @@ class NotasDAO
     {
         try {
             /// Instrução sql, faz referência ao procedimento inserir dados, na base de dados 
-            $Sql = "INSERT INTO notas (idAluno,idDisciplina,notaObtida,dataAvaliacao)values(:idAluno,:idDisciplina,:notaObtida,:dataAvaliacao)";
+            $Sql = "INSERT INTO notas (id_aluno,id_disciplina,nota_obtida,data_avaliacao)values(:id_aluno,:id_disciplina,:nota_obtida,:data_avaliacao)";
             //Fazer a conexão com a base de dados
             $Sql_procedure = DBConnection::getConnection()->prepare($Sql);
-            ///Preencher o campo idAluno na base de dados
-            ///Actualizar o campo idAluno na base de dados
-            $Sql_procedure->bindValue(":idAluno", $Prof->getIdAluno());
-            ///Actualizar o campo idAluno na base de dados
-            $Sql_procedure->bindValue(":idDisciplina", $Prof->getIdDisciplina());
+            ///Preencher o campo id_aluno na base de dados
+            ///Actualizar o campo id_aluno na base de dados
+            $Sql_procedure->bindValue(":id_aluno", $Prof->getidaluno());
+            ///Actualizar o campo id_aluno na base de dados
+            $Sql_procedure->bindValue(":id_disciplina", $Prof->getIdDisciplina());
             ///Actualizar o campo idade na base de dados
-            $Sql_procedure->bindValue(":notaObtida", $Prof->getNotaObtida());
-             
-            $Sql_procedure->bindValue(":dataAvaliacao", $Prof->getDataAvaliacao()); 
+            $Sql_procedure->bindValue(":nota_obtida", $Prof->getNotaObtida());
+            $Sql_procedure->bindValue(":data_avaliacao", $Prof->getDataAvaliacao());
             //essa linha permite efectivar a instrução sql e depois o resultado é devolvido através do comando return
             return $Sql_procedure->execute();
         } catch (Exception  $ex) {
@@ -33,19 +32,19 @@ class NotasDAO
         try {
 
             /// Instrução sql, faz referência ao procedimento actualizar dados, na base de dados 
-            $Sql = "UPDATE notas SET idAluno=:idAluno, idDisciplina=:idDisciplina,notaObtida=:notaObtida,dataAvaliacao,=:dataAvaliacao
+            $Sql = "UPDATE notas SET id_aluno=:id_aluno, id_disciplina=:id_disciplina,nota_obtida=:nota_obtida,data_avaliacao,=:data_avaliacao
             where id=:id";
             //Fazer a conexão com a base de dados
             $Sql_procedure = DBConnection::getConnection()->prepare($Sql);
             $Sql_procedure->bindValue(":id", $Prof->getId());
             ///Apanhar o campo id na base de dados para permitir actualizar as restantes colunas na base de dados
-            $Sql_procedure->bindValue(":idAluno", $Prof->getIdAluno());
-            ///Actualizar o campo idAluno na base de dados
-            $Sql_procedure->bindValue(":idDisciplina", $Prof->getIdDisciplina());
+            $Sql_procedure->bindValue(":id_aluno", $Prof->getidaluno());
+            ///Actualizar o campo id_aluno na base de dado
+            $Sql_procedure->bindValue(":id_disciplina", $Prof->getiddisciplina());
             ///Actualizar o campo idade na base de dados
-            $Sql_procedure->bindValue(":notaObtida", $Prof->getNotaObtida());
-             
-            $Sql_procedure->bindValue(":dataAvaliacao", $Prof->getDataAvaliacao()); 
+            $Sql_procedure->bindValue(":nota_obtida", $Prof->getnotaobtida());
+
+            $Sql_procedure->bindValue(":data_avaliacao", $Prof->getDataAvaliacao());
 
             //essa linha permite efectivar a instrução sql e depois o resultado é devolvido através do comando return
             return $Sql_procedure->execute();
@@ -75,7 +74,7 @@ class NotasDAO
     {
         try {
             /// Instrução sql, faz referência ao procedimento consultar dados, na base de dados 
-            $Sql = "SELECT * FROM `notas` INNER JOIN disciplinas ON notas.dataAvaliacao=disciplinas.id";
+            $Sql = "SELECT * FROM notas INNER JOIN disciplinas ON notas.id_disciplina=disciplinas.id INNER JOIN alunos ON notas.id_aluno=alunos.id ";
             //Fazer a conexão com a base de dados
             $Sql_procedure = DBConnection::getConnection()->query($Sql);
             // Permite consultar toda informação na base de dados  
@@ -99,12 +98,12 @@ class NotasDAO
     private function Listar($linha)
     {
         //Instanciar o objecto Prof
-        $Prof = new NotaDTO(); 
-        $Prof->setId($linha['id']); 
-        $Prof->setidAluno($linha['idAluno']); 
-        $Prof->setidDisciplina($linha['idDisciplina']); 
-        $Prof->setnotaObtida($linha['notaObtida']);
-        $Prof->setDataAvaliacao($linha['dataAvaliacao']); 
+        $Prof = new NotaDTO();
+      
+        $Prof->setNome($linha['nome']);
+        $Prof->setNomeDisciplina($linha['nome_disciplina']);
+        $Prof->setnotaobtida($linha['nota_obtida']);
+        $Prof->setdataavaliacao($linha['data_avaliacao']);
         // Depois do objecto estar preenchido , devolve os dados a função listar
         return $Prof;
     }

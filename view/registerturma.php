@@ -5,7 +5,14 @@ include_once("../model/DAO/ProfessorDAO.php");
 include_once("../model/DTO/ProfessorDTO.php");
 $professorDTO = new ProfessorDTO();
 $professorDAO = new ProfessorDAO();
-
+session_start();
+if(isset($_SESSION['name'])) {
+    // Usuário está logado
+   //  echo 'Usuário logado: ' . $_SESSION['name'];
+} else {
+    // Usuário não está logado
+    header("Location: login-form.php");
+}
 ?>
 
 <!DOCTYPE html>

@@ -1,12 +1,10 @@
-
 <?php
 
-if(session_unset()) {
-    $username = $_SESSION['username']; 
-    header("Location: home.php"); 
+ // Iniciar a sessão
+if (isset($_SESSION['name'])) {
+    // Usuário está logado
+    header("Location:home.php");
 } else {
-    //header("Location: login-form.php"); // Redirecionar de volta para a página de login se a sessão não estiver definida
-    //exit();
 }
 ?>
 <!DOCTYPE html>
@@ -14,97 +12,65 @@ if(session_unset()) {
 
 <head>
     <title>SGT Login</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f2f2f2;
-            font-family: Arial, sans-serif;
-        }
-
-        .login-container, .register-container {
-            background-color: #d11b; 
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 20px;
-            max-width: 400px; /* Ajuste a largura máxima conforme desejado */
-            width: 100%; /* Definir a largura como 100% */
-        }
-
-        h2 {
-            text-align: center;
-        }
-
-        label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-
-        input {
-            width: 95%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #4c79af;
-            color: white;
-            cursor: pointer;
-        }
-        .profile-picture {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 20px;
-        }
-        button:hover {
-            background-color: #64bbf5;
-        }
-        .btnLogin{
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #000000;
-            color: white;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
+    <link rel="stylesheet" href="../assets/css/styles.min.css" />
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+    <script src="../assets/js/app.min.js"></script>
+    <script src="../assets/js/sidebarmenu.js"></script>
 </head>
 
 <body>
-    <div class="login-container">
-    <center><img class="profile-picture" src="semphoto.png"></center>
-        <h2>Bem-Vindo</h2>
-        <form action="../controller/login.php" method="post">
-            <div>
-                <label for="username">Usuário:</label>
-                <input type="text" id="username" name="username" required>
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+        <div class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+            <div class="d-flex align-items-center justify-content-center w-100">
+                <div class="row justify-content-center w-100">
+                    <div class="col-md-8 col-lg-6 col-xxl-3">
+                        <div class="card mb-0">
+                            <div class="card-body">
+                                <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                                    <img src="../assets/images/logos/COLEGIO_MEDAF__1_-removebg-preview.png" width="180" alt="">
+                                </a>
+                                <?php
+                                // Verifique se há um parâmetro 'erro' na URL
+                                if (isset($_GET['erro']) && $_GET['erro'] === 'senha_incorreta') {
+                                    echo '<center><p style="color: red;">Email / Senha  incorreta. Tente novamente!</p></center>';
+                                }
+                                ?>
+                                <p class="text-center">Seja bem vindo</p>
+                                <form action="../controller/login.php" method="post">
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                                        <input type="email" class="form-control" name="username" require id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                                        <input type="password" class="form-control" name="password" require id="exampleInputPassword1">
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input primary" type="checkbox" value="" id="flexCheckChecked" checked="">
+                                            <label class="form-check-label text-dark" for="flexCheckChecked">
+                                                Lembre-se deste dispositivo
+                                            </label>
+                                        </div>
+                                        <a class="text-primary fw-bold" href="#">Esqueceu sua senha?</a>
+                                    </div>
+                                    <button class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Entrar </button>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <p class="fs-4 mb-0 fw-bold">Novo na SGE?</p>
+                                        <a class="text-primary fw-bold ms-2" href="register-form.php">Crie a sua conta aqui</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label for="password">Senha:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Entrar</button>
-        </form>
-        <br>
-      
-       <form action="register-form.php" method="post"> 
-        <button class="btnLogin" type="submit">Registrar</button>
-    </form>
+        </div>
     </div>
- 
+
 </body>
 
 </html>

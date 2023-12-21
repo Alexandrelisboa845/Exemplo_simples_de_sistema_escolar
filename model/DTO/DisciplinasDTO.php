@@ -1,5 +1,6 @@
 <?php
-class DisciplinaDTO {
+require_once 'AlunoDTO.php';
+class DisciplinaDTO extends AlunoDTO {
     private $id;
     private $nomeDisciplina;
     private $cargaHoraria;

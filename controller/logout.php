@@ -1,5 +1,7 @@
 <?php
-session_destroy(); // Iniciar a sessão
+
+session_destroy(); 
+session_unset(); // Iniciar a sessão
 
 if(isset($_SESSION['username'])) {
     $username = $_SESSION['username'];~

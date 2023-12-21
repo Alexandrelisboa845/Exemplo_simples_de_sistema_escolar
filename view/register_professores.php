@@ -5,6 +5,14 @@ include_once("../model/DAO/DisciplinaDAO.php");
 include_once("../model/DTO/DisciplinasDTO.php");
 $disciplinaDTO = new DisciplinaDTO();
 $DisciplinaDAO = new DisciplinaDAO();
+session_start();
+if(isset($_SESSION['name'])) {
+    // Usuário está logado
+   //  echo 'Usuário logado: ' . $_SESSION['name'];
+} else {
+    // Usuário não está logado
+    header("Location: login-form.php");
+}
 ?>
 <!DOCTYPE html>
 <html>

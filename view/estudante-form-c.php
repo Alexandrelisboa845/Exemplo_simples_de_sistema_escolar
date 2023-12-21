@@ -1,9 +1,11 @@
 <?php
-if(session_unset()) {
-    $username = $_SESSION['username']; 
-    header("Location: login-form.php");
+session_start();
+if(isset($_SESSION['name'])) {
+    // Usuário está logado
+   //  echo 'Usuário logado: ' . $_SESSION['name'];
 } else {
- 
+    // Usuário não está logado
+    header("Location: login-form.php");
 }
 ?>
 
@@ -127,7 +129,9 @@ if(session_unset()) {
         <a href="../controller/logout.php">Sair</a>
     </div> 
 <center>
-<div class="login-container">
+<div class="body-wrapper">  <?php
+            include_once("headerApp.php"); ?>
+            <div class="container-fluid">
     <h3>Adicionar na Pauta</h3>
     <form method="post" action="../controller/EstudanteController.php">
       <div class="form-group">

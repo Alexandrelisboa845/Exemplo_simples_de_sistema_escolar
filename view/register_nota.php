@@ -7,14 +7,18 @@ include_once("../model/DAO/AlunoDAO.php");
 include_once("../model/DTO/AlunoDTO.php");
 include_once("../model/DAO/TurmaDAO.php");
 include_once("../model/DTO/TurmasDTO.php");
+include_once("../model/DAO/DisciplinaDAO.php");
+include_once("../model/DTO/DisciplinasDTO.php");
+$disciplicaDTO = new DisciplinaDTO();
+$disciplinaDAO = new DisciplinaDAO();
 $turma = new TurmaDTO();
 $turmaDAO = new TurmaDAO();
 $aluno = new AlunoDTO();
 $alunoDAO = new AlunoDAO();
 session_start();
-if(isset($_SESSION['name'])) {
+if (isset($_SESSION['name'])) {
     // Usuário está logado
-   //  echo 'Usuário logado: ' . $_SESSION['name'];
+    //  echo 'Usuário logado: ' . $_SESSION['name'];
 } else {
     // Usuário não está logado
     header("Location: login-form.php");
@@ -98,7 +102,6 @@ if(isset($_SESSION['name'])) {
             border-radius: 5px;
             border: 1px solid #ddd;
         }
-
         .custom-select {
             display: block;
             width: 100%;
@@ -131,10 +134,10 @@ if(isset($_SESSION['name'])) {
 
     <div class="register-container">
 
-        <h2>Matricula de Estudante</h2>
-        <form action="../controller/matriculaController.php" method="post">
+        <h2>Nota para Estudante</h2>
+        <form action="../controller/NotaController.php" method="post">
 
-            <div>
+            <div class="mb-3">
                 <label for="password">Estudante:</label>
                 <select class="custom-select" name="id_aluno">
                     <?php
@@ -146,20 +149,28 @@ if(isset($_SESSION['name'])) {
                     <?php endforeach  ?>
                 </select>
             </div>
-            <div>
-                <label for="password">Turma:</label>
-                <select class="custom-select" name="id_turma">
+            <div class="mb-3">
+                <label for="password">Disciplina:</label>
+                <select class="custom-select" name="id_disciplina">
                     <?php
-                    foreach ($turmaDAO->ReadM() as $turma) :
+                    foreach ($disciplinaDAO->Read() as $disciplicaDTO) :
                         $count++;
                     ?>
-                        <option value="<?php echo $turma->getid() ?>"><?php echo $turma->getCodigoTurma() ?></option>
+                        <option value="<?php echo $disciplicaDTO->getid() ?>"><?php echo $disciplicaDTO->getNomeDisciplina() ?></option>
 
                     <?php endforeach  ?>
                 </select>
             </div>
+            <div class="mb-3">
+                <label for="exampleInputtext1" class="form-label">Nota 0 a 20</label>
+                <input type="number" class="form-control" minlength="0" require maxlength="2" max="20" name="nota" id="exampleInputtext1" require aria-describedby="textHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputtext1" class="form-label">Data da avaliação</label>
+                <input type="date" class="form-control" minlength="0" require maxlength="2" max="20" name="data" id="exampleInputtext1" require aria-describedby="textHelp">
+            </div>
             <p></p>
-            <button type="submit">Registrar </button>
+            <button type="submit">Adicionar nota </button>
         </form>
 
         <br>

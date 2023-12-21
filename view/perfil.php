@@ -27,13 +27,11 @@
             object-fit: cover;
             margin: 0 auto 20px;
         }
-
         .profile-name {
             font-size: 24px;
             font-weight: bold;
             margin-bottom: 10px;
         }
-
         .profile-details {
             font-size: 16px;
             color: #888888;
@@ -51,6 +49,14 @@
 
 <body>
 <?php
+session_start();
+if(isset($_SESSION['name'])) {
+    // Usuário está logado
+   //  echo 'Usuário logado: ' . $_SESSION['name'];
+} else {
+    // Usuário não está logado
+    header("Location: login-form.php");
+}
 include("navbar.php");
 ?>
     <div class="profile-card">

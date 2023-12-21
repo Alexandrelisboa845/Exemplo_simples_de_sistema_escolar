@@ -1,3 +1,14 @@
+<?php
+session_start();
+if(isset($_SESSION['name'])) {
+    // Usuário está logado
+   //  echo 'Usuário logado: ' . $_SESSION['name'];
+} else {
+    // Usuário não está logado
+    header("Location: login-form.php");
+}
+?>
+
 <!DOCTYPE html>
 <html>
 

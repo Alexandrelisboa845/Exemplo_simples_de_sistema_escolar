@@ -1,5 +1,7 @@
 <?php
-class NotaDTO {
+ 
+require_once 'DisciplinasDTO.php';
+class NotaDTO  extends DisciplinaDTO {
     private $id;
     private $idAluno;
     private $idDisciplina;
